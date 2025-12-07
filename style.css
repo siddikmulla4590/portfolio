@@ -32,7 +32,8 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    /* Use a slightly larger max-width for better desktop utilization */
+    max-width: 1200px; 
     margin: 0 auto;
     padding: 0 25px;
 }
@@ -78,8 +79,7 @@ h1, h2, h3, h4 {
     width: 100px; /* Hover effect */
 }
 
-
-/* --- 2. Header & Navigation (Enhanced) --- */
+/* --- 2. Header & Navigation (Enhanced Responsive) --- */
 header {
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -91,29 +91,16 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.3s;
+    transition: padding 0.3s;
 }
 
-/* Animated Logo Styling */
 .logo {
-    font-size: 2.2em; /* Bigger */
-    font-weight: 900; /* Bolder */
+    font-size: 2.2em;
+    font-weight: 900;
     letter-spacing: 3px;
-    /* Animation Properties */
     animation: color-shift 5s infinite alternate;
     transition: transform 0.3s;
 }
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
-@keyframes color-shift {
-    0% { color: var(--primary-color); }
-    50% { color: var(--bright-purple); }
-    100% { color: var(--accent-color); }
-}
-
 
 .nav-item {
     color: var(--text-color);
@@ -125,7 +112,6 @@ header {
     transition: all var(--transition-speed);
 }
 
-/* Underline grow animation */
 .nav-item::after {
     content: '';
     position: absolute;
@@ -139,7 +125,7 @@ header {
 
 .nav-item:hover {
     color: var(--primary-color);
-    transform: translateY(-2px); /* Subtle lift on hover */
+    transform: translateY(-2px);
 }
 
 .nav-item:hover::after {
@@ -150,7 +136,7 @@ header {
     background-color: var(--primary-color);
     color: var(--background-light) !important;
     padding: 10px 20px;
-    border-radius: 20px; /* More modern, pill shape */
+    border-radius: 20px;
     border: 2px solid var(--primary-color);
     transition: all var(--transition-speed);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -158,21 +144,29 @@ header {
 .contact-cta:hover {
     background-color: var(--background-light);
     color: var(--primary-color) !important;
-    transform: translateY(-3px) scale(1.02); /* More pronounced lift */
+    transform: translateY(-3px) scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 .contact-cta:hover::after {
-    width: 0; /* Disable the line animation on the button */
+    width: 0;
 }
+
+@keyframes color-shift {
+    0% { color: var(--primary-color); }
+    50% { color: var(--bright-purple); }
+    100% { color: var(--accent-color); }
+}
+
 
 /* --- 3. Hero Section (Premium Look) --- */
 #hero {
-    height: 100vh;
+    /* Use VH less aggressively on large screens, more flexibly on small ones */
+    min-height: 90vh; 
     display: flex;
     align-items: center;
     background: linear-gradient(145deg, var(--primary-color) 0%, #4a3875 100%);
     color: var(--background-light);
-    padding-top: 80px;
+    padding: 120px 0 60px 0; /* Adjusted vertical padding */
     overflow: hidden;
 }
 
@@ -180,27 +174,19 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 25px;
     gap: 80px;
 }
 
 .hero-text-area {
-    max-width: 55%;
-}
-
-.greeting {
-    font-size: 1.1em;
-    letter-spacing: 3px;
-    margin-bottom: 5px;
-    color: var(--accent-color);
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.2s forwards;
+    flex-grow: 1;
 }
 
 #hero h1 {
-    font-size: 4.5em;
+    /* Fluid typography for heading */
+    font-size: clamp(2.5rem, 6vw, 4.5rem); 
     line-height: 1.1;
     margin-bottom: 10px;
     opacity: 0;
@@ -208,143 +194,66 @@ header {
 }
 
 .role-subtitle {
-    font-size: 1.6em;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.6s forwards;
-}
-
-.hero-divider {
-    width: 80px;
-    height: 4px;
-    background-color: var(--accent-color);
-    margin-bottom: 30px;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 0.8s forwards;
 }
 
 .summary-line {
     font-weight: 300;
     font-size: 1.1em;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 1s forwards;
-}
-
-.cta-button-premium {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--primary-color);
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: all var(--transition-speed);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.cta-button-premium:hover {
-    background: #f0d588;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
-    transform: translateY(-4px); /* More pronounced lift */
 }
 
 .hero-profile-image {
     width: 300px;
     height: 300px;
+    flex-shrink: 0;
     border-radius: 50%;
     border: 5px solid var(--accent-color);
     overflow: hidden;
-    background-color: #6a717b;
     box-shadow: 0 0 0 10px rgba(230, 195, 96, 0.2); 
     transition: transform 0.5s;
     opacity: 0;
     animation: fadeIn 1s ease-out 0.5s forwards;
 }
 
-.hero-profile-image:hover {
-    transform: scale(1.1) rotate(2deg); /* Enhanced hover */
-}
-/* Ensure the image inside the circle is correctly sized */
-.hero-profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
 
 /* --- 4. About Section --- */
 .large-text {
     font-size: 1.25em;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto 40px;
     text-align: center;
     color: var(--text-color);
 }
 
-.social-links-minimal {
-    text-align: center;
-}
-
 .social-links-minimal a {
     color: var(--primary-color);
-    margin: 0 18px; /* Slightly wider spacing */
+    margin: 0 18px;
     transition: color var(--transition-speed), transform var(--transition-speed);
 }
 
-.social-links-minimal a:hover {
-    color: var(--accent-color);
-    transform: scale(1.4) rotate(-5deg); /* Dynamic hover */
-}
 
 /* --- 5. Skills/Expertise (Elevated Cards) --- */
 .skills-grid-premium {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    /* Maintain min width, but adjust for smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px; /* Reduced gap slightly for compact mobile view */
 }
 
 .skill-card-premium {
     background-color: var(--background-dark);
-    padding: 40px;
+    padding: 30px; /* Reduced padding slightly */
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     color: var(--background-light);
     transition: all var(--transition-speed);
 }
 
-.skill-icon {
-    font-size: 3em;
-    color: var(--accent-color);
-    margin-bottom: 15px;
-    transition: transform 0.5s;
-}
-
 .skill-card-premium h4 {
-    color: var(--accent-color);
-    margin-bottom: 10px;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 
-/* CSS-Only 3D Lift on Hover */
-.hover-3d-lift {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.hover-3d-lift:hover {
-    background-color: #4a3875; /* Slightly darker shade on hover */
-    transform: perspective(1000px) rotateX(1deg) rotateY(1deg) scale(1.05); /* Enhanced lift */
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6); /* Deeper shadow */
-}
-
-.hover-3d-lift:hover .skill-icon {
-    transform: translateY(-8px); /* Deeper icon lift */
-}
 
 /* --- 6. Projects Section (Clean, Dual Layout) --- */
 .projects-grid-premium {
@@ -356,303 +265,363 @@ header {
 .project-item {
     display: flex;
     align-items: center;
-    gap: 50px;
-    background-color: var(--background-light);
-    border-radius: 8px;
-    padding: 40px;
+    gap: 40px;
+    padding: 30px; 
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: box-shadow var(--transition-speed), transform 0.3s;
-    overflow: hidden;
-}
-
-.project-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .project-details {
     flex: 1;
-    max-width: 50%;
-}
-
-.project-subhead {
-    color: var(--primary-color);
-    text-transform: uppercase;
-    font-size: 0.9em;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
-
-.project-item h4 {
-    font-size: 2em;
-    margin-bottom: 15px;
-}
-
-.tech-stack {
-    color: var(--secondary-color);
-    font-style: italic;
-    margin-top: 15px;
-}
-
-.project-link-premium {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 500;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom-color 0.3s, color 0.3s;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.project-link-premium:hover {
-    border-bottom-color: var(--accent-color);
-    color: var(--primary-color); /* Color change on hover */
+    max-width: 55%;
 }
 
 .project-image-box {
-    width: 40%;
-    min-height: 280px;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #cccccc;
-    transition: transform 0.6s ease;
+    width: 45%;
+    min-height: 250px;
 }
 
-/* Ensure the image inside the box is correctly sized */
-.project-image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Hover Animation: Shine Effect (Uses Box Shadow) */
-.hover-shine {
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-}
-
-.hover-shine:hover {
-    box-shadow: 0 10px 40px rgba(95, 75, 139, 0.2);
-}
-
-.hover-shine:hover .project-image-box {
-    transform: scale(1.08); /* Stronger image zoom */
-}
-
-/* Reversing layout for odd/even projects */
-.project-right {
-    flex-direction: row-reverse;
+.project-item h4 {
+    font-size: 1.8em;
 }
 
 /* --- 7. Education & Hobbies (Split Panel) --- */
 .section-split-panel {
     display: flex;
-    min-height: 500px;
+    /* Use 100% width on flex items */
+    width: 100%; 
 }
 
 .split-panel {
     flex: 1;
     padding: 80px 40px;
-    color: var(--background-light);
-    display: flex;
-    align-items: center;
+    min-height: 450px; /* Ensure content looks substantial */
 }
 
 .education-panel {
     background-color: var(--primary-color);
+    color: var(--background-light);
 }
-
 .hobbies-panel {
-    background-color: var(--background-dark);
+    background-color: var(--background-light);
+    color: var(--text-color);
 }
-
-.panel-content {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.section-heading-inverted {
-    font-size: 2em;
-    text-align: center;
-    margin-bottom: 40px;
+.education-panel .section-heading-inverted {
     color: var(--accent-color);
 }
-
-/* Timeline Styling */
-.timeline-premium {
-    position: relative;
-    padding-left: 20px;
+.hobbies-panel .section-heading-inverted {
+    color: var(--primary-color);
 }
-.timeline-premium::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 5px;
-    bottom: 5px;
-    width: 2px;
-    background-color: rgba(255, 255, 255, 0.3);
+.hobbies-panel .hobby-item-premium i {
+    color: var(--primary-color);
+}
+
+/* Timeline specific styles */
+.timeline-premium {
+    border-left: 2px solid var(--accent-color);
+    padding-left: 20px;
 }
 
 .timeline-entry {
     margin-bottom: 30px;
     position: relative;
-    padding-left: 20px;
-    transition: transform 0.5s ease-out;
-}
-.timeline-entry:hover {
-    transform: translateX(20px); /* Enhanced timeline hover */
+    padding-left: 15px;
 }
 
 .timeline-entry::before {
     content: '';
     position: absolute;
-    left: -7px;
-    top: 8px;
-    width: 15px;
-    height: 15px;
+    left: -28px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
     background-color: var(--accent-color);
     border-radius: 50%;
     border: 3px solid var(--primary-color);
-    transition: background-color 0.3s;
 }
-
+.timeline-entry h4 {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
 .timeline-date {
     font-size: 0.9em;
-    font-weight: 300;
-    opacity: 0.8;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.timeline-entry h4 {
-    font-size: 1.4em;
-    margin-bottom: 5px;
-    color: var(--accent-color);
-}
 
-/* Hobbies Grid */
+/* Hobbies specific styles */
 .hobbies-grid-premium {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
     text-align: center;
 }
 
 .hobby-item-premium {
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    transition: all 0.3s;
+    background: #fff;
+    padding: 20px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
 }
-
-.hobby-item-premium i {
-    color: var(--accent-color);
-    margin-bottom: 10px;
-}
-
 .hobby-item-premium:hover {
-    background-color: #4a3875; 
-    transform: scale(1.1); /* Stronger scale effect */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.hobby-item-premium i {
+    margin-bottom: 5px;
 }
 
 
 /* --- 8. Footer --- */
 .minimal-footer {
-    padding: 60px 0;
-    background-color: var(--background-dark);
-    color: rgba(255, 255, 255, 0.7);
+    padding: 50px 0;
     text-align: center;
+    background-color: #ECEFF1; /* Light gray background for contrast */
 }
 
 .contact-call-to-action {
-    font-size: 1.6em;
-    margin-bottom: 20px;
-    color: var(--background-light);
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
 .footer-email-link {
-    font-size: 2em;
-    color: var(--accent-color);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.3s, transform 0.3s;
+    transition: color 0.3s;
     display: block;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
 }
 
 .footer-email-link:hover {
-    color: #f0d588;
-    transform: scale(1.05); /* Enhanced scale */
+    color: var(--primary-color);
 }
 
 .copyright {
+    margin-top: 20px;
     font-size: 0.85em;
-    opacity: 0.6;
+    color: #95A5A6;
 }
 
-/* --- Keyframe Animations (Entrance) --- */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+/* --- ANIMATIONS --- */
 
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-/* --- Responsive Design (Essential for Class) --- */
+/* 3D Lift Hover Effect (for skill cards) */
+.hover-3d-lift:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Shine Hover Effect (for project cards) */
+.hover-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-20deg);
+    transition: all 0.5s;
+}
+
+.hover-shine:hover::before {
+    left: 125%;
+}
+
+/* --- MEDIA QUERIES FOR PROFESSIONAL RESPONSIVENESS --- */
+
+/* Tablet and Smaller Desktops (Max 1150px) */
+@media (max-width: 1150px) {
+    .container {
+        padding: 0 20px;
+    }
+    .hero-content-inner {
+        gap: 40px;
+    }
+    #hero h1 {
+        font-size: clamp(2.2rem, 5vw, 4rem);
+    }
+    .hero-profile-image {
+        width: 250px;
+        height: 250px;
+    }
+    .project-details {
+        max-width: 60%;
+    }
+    .project-image-box {
+        width: 40%;
+    }
+}
+
+/* Medium Tablets (Max 992px) - Stacked Layouts Begin */
 @media (max-width: 992px) {
+    .section-padding {
+        padding: 80px 0;
+    }
+    .section-heading {
+        margin-bottom: 50px;
+        font-size: 2em;
+    }
+
+    /* Header: Make logo full width/center when nav hides */
+    header {
+        padding: 15px 20px;
+        justify-content: center;
+    }
+    .desktop-nav {
+        display: none;
+    }
+
+    /* Hero Section: Stacked and Centered */
+    #hero {
+        padding-top: 100px;
+        text-align: center;
+        min-height: 80vh; /* Adjust min height for better fit */
+    }
     .hero-content-inner {
         flex-direction: column;
+        gap: 30px;
+    }
+    .hero-text-area {
         text-align: center;
     }
-
-    .hero-text-area, .project-details {
-        max-width: 100%;
-        text-align: center;
-    }
-
-    #hero h1 {
-        font-size: 3.5em;
-    }
-    
     .hero-divider {
-        margin: 20px auto;
+        margin: 20px auto 30px auto;
     }
-
-    .project-item {
-        flex-direction: column !important; /* Forces stack on mobile */
-        padding: 25px;
-    }
-
-    .project-image-box {
-        width: 100%;
-        min-height: 200px;
-        order: -1; /* Image appears first in stack */
+    .hero-profile-image {
+        width: 200px;
+        height: 200px;
+        order: -1; /* Move image above text */
     }
     
+    /* About Section */
+    .large-text {
+        font-size: 1.15em;
+    }
+    .social-links-minimal {
+        margin-bottom: 30px;
+    }
+
+    /* Projects: Forced Stack */
+    .project-item {
+        flex-direction: column !important; 
+        gap: 20px;
+    }
+    .project-details, .project-image-box {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    .project-image-box {
+        order: -1;
+        min-height: 200px;
+    }
+    .project-item h4 {
+        font-size: 1.6em;
+    }
+    .project-link-premium {
+        margin-top: 15px;
+    }
+
+    /* Split Panel: Forced Stack */
     .section-split-panel {
         flex-direction: column;
     }
-
     .split-panel {
-        padding: 60px 20px;
+        padding: 60px 30px;
+        min-height: auto;
+    }
+    
+    .hobbies-grid-premium {
+        grid-template-columns: repeat(3, 1fr); /* Keep 3 columns if space allows */
+    }
+
+    /* Footer */
+    .footer-email-link {
+        font-size: 1.6em;
     }
 }
 
-@media (max-width: 600px) {
-    header {
-        padding: 15px 20px;
+/* Small Mobiles (Max 576px) - Final Adjustments */
+@media (max-width: 576px) {
+    .section-padding {
+        padding: 50px 0;
     }
-    .desktop-nav {
-        display: none; /* Hide complex desktop nav */
-    }
+    
     .logo {
-        width: 100%;
-        text-align: center;
-        font-size: 1.8em; /* Adjusted smaller for mobile view */
+        font-size: 1.6em;
+        letter-spacing: 2px;
+    }
+    
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    .role-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-profile-image {
+        width: 150px;
+        height: 150px;
+        border-width: 3px;
+    }
+
+    .cta-button-premium {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+
+    .skills-grid-premium {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+    
+    .social-links-minimal a {
+        margin: 0 10px;
+        font-size: 1.5em; /* Smaller icons for tight mobile space */
+    }
+
+    .hobbies-grid-premium {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on smallest mobile */
+    }
+
+    .footer-email-link {
+        font-size: 1.4em;
+    }
+
+    .contact-call-to-action {
+        font-size: 1.2em;
+    }
+    .timeline-entry::before {
+        left: -20px; /* Adjust timeline dot position */
     }
 }
